@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title — GM Toolbox</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("head", required: false)
+</head>
+<body>
+    @Html.Partial("_NavBar")
+    <div class="container body-content">
+        @RenderBody()
+
+    </div>
+
+    @RenderSection("scripts", required: false)
+    <div class="container body-content">
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year — GM ToolBox by Radosław Wojakowski and Dominik Kumor</p>
+        </footer>
+    </div>
+</body>
+</html>

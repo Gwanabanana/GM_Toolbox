@@ -1,0 +1,26 @@
+﻿@model Website.ViewModels.CampaignViewModel
+@{
+    ViewBag.Title = "Campaigns";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    bool isThereCampaign = false;
+    foreach (var campaign in Model.Campaigns)
+    {
+        if (campaign.Id == Model.Id)
+        {
+            <H1>@campaign.Name</H1>
+
+            isThereCampaign = true;
+            break;
+        }
+    }
+    if (!isThereCampaign)
+    {
+        <H1>There is no campaign with id = @Model.Id</H1>
+    }
+
+}
+
+

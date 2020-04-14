@@ -1,0 +1,23 @@
+﻿@model Website.ViewModels.WorldViewModel
+@{
+    ViewBag.Title = "Worlds";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    bool isThereWorld = false;
+    foreach (var world in Model.Worlds)
+    {
+        if (world.Id == Model.Id)
+        {
+            <H1>@world.Name</H1>
+
+            isThereWorld = true;
+            break;
+        }
+    }
+    if (!isThereWorld)
+    {
+        <H1>There is no world with id = @Model.Id</H1>
+    }
+}

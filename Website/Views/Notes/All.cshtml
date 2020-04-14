@@ -1,0 +1,109 @@
+﻿@model Website.ViewModels.NotesCategoryViewModel
+@{
+    ViewBag.Title = "Notes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <span class="nav-item active">
+        <a class="nav-link" href="/Notes/All">All</a>
+    </span>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            @foreach (var category in Model.Categories)
+            {
+                <span class="nav-item">
+                    <a class="nav-link" href="/Notes?category=@category">@category</a>
+                </span>
+            }
+            <span class="nav-item">
+                <a class="nav-link" href="/Notes">Other</a>
+            </span>
+        </ul>
+    </div>
+</nav>
+
+<table class="table table-hover">
+    @{ string dataTarget = "#Delete";
+        string dataTargetWithoutHash = "Delete";}
+
+    @foreach (var note in Model.Notes)
+    {
+
+        <tr class="table-primary">
+            <th scope="row">
+                <a href=/TextEditor/GetNote/@note.Id>
+                    <span>
+                        @note.Title
+                    </span>
+                    @if (note.Category != null)
+                    {
+                        <span class="badge badge-secondary">
+                            @note.Category
+                        </span>
+                    }
+                </a>
+            </th>
+
+            <td style="text-align:end">
+                <a href="/TextEditor/Edit/@note.Id">
+                    <span class="btn btn-primary btn-lg">
+
+                        Edit
+                    </span>
+
+                </a>
+
+                @{ dataTarget = "#Delete" + @note.Id.ToString();}
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target=@dataTarget>
+                    Delete
+                </button>
+            </td>
+        </tr>
+        <!-- Modal -->
+        dataTargetWithoutHash = "Delete" + @note.Id.ToString();
+
+        <div class="modal fade" id=@dataTargetWithoutHash tabindex=-1 role="dialog" aria-labelledby=@dataTarget>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel" style="color:#fff">Delete</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+
+                    <div class="modal-body">
+                        This action is permanent. Are You sure You want to delete this note?
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary">
+                            <a href="/TextEditor/Delete?id=@note.Id&isInAllPage=true">
+                                Delete
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @{ string createUrl = "/TextEditor/Index";}
+    <tr class="table-primary">
+        <th scope="row">
+            @*Po indeksie musisz podać kategorię, w której się znajdujesz*@
+            <a href=@createUrl>
+                <span>
+                    Create new note
+                </span>
+            </a>
+        </th>
+        <td></td>
+    </tr>
+</table>

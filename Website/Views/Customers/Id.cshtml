@@ -1,0 +1,25 @@
+﻿@model Website.ViewModels.CustomerViewModel
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    bool isThereCustomer = false;
+    foreach (var customer in Model.Customers)
+    {
+        if (customer.Id == Model.Id)
+        {
+            <H1>@customer.Name</H1>
+
+            isThereCustomer = true;
+            break;
+        }
+    }
+    if (!isThereCustomer)
+    {
+            <H1>There is no customer with id = @Model.Id</H1>
+    }
+}
+
+

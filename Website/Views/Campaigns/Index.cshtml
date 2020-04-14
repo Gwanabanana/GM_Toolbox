@@ -1,0 +1,15 @@
+﻿@model Website.ViewModels.CampaignViewModel
+@{
+    ViewBag.Title = "Campaigns";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var campaign in Model.Campaigns)
+{
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title"><a href=/Campaigns/Id/@campaign.Id>@campaign.Name</a></h4>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+}
